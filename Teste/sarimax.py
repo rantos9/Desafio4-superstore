@@ -2,9 +2,7 @@ import statsmodels.api as sm
 import itertools
 
 def sarimax (timeseries):
-    
     #Finds the best SARIMAX hyperparameters for a given timeseries 
-    
     p = d = q = range(0, 2)
     pdq = list(itertools.product(p, d, q))
     seasonal_pdq = [(x[0], x[1], x[2], 12) for x in list(itertools.product(p, d, q))]
@@ -23,17 +21,7 @@ def sarimax (timeseries):
                     good_param_seasonal = param_seasonal
             except:
                 continue
-            
-    return good_param, good_param_seasonal
-
-#Ajusta os valores do SARIMAX para a melhor performace
-tunning_SARIMAX_hyperparameters(y)
-
-#Fita o modelo Sarimax para os valores do df
-mod = sm.tsa.statespace.SARIMAX(y,
-                                order=good_param,
-                                seasonal_order=good_param_seasonal,
-                                enforce_stationarity=False,
-                                enforce_invertibility=False)
-
-return results = mod.fit()
+    #Fita o modelo Sarimax para os valores do df
+    mod = sm.tsa.statespace.SARIMAX(y,order=good_param,seasonal_order=good_param_seasonal,enforce_stationarity=False,enforce_invertibility=False)
+    results = mod.fit()
+    return results
