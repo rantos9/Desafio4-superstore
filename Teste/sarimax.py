@@ -1,7 +1,7 @@
 import statsmodels.api as sm
 import itertools
-def 
-def tunning_SARIMAX_hyperparameters(timeseries):
+
+def sarimax (timeseries):
     
     #Finds the best SARIMAX hyperparameters for a given timeseries 
     
@@ -36,6 +36,4 @@ mod = sm.tsa.statespace.SARIMAX(y,
                                 enforce_stationarity=False,
                                 enforce_invertibility=False)
 
-results = mod.fit()
-#Printa os resultados do SARIMAX
-print(results.summary().tables[1])
+return results = mod.fit()

@@ -29,17 +29,16 @@ def prophet(data):
     
     # Define função para plotar o gráfico
     def plotly_df(data2, title=''):
-    #"""Visualize all the dataframe columns as line plots."""
-    common_kw = dict(x=df.index, mode='lines')
-    data = [go.Scatter(y=data2[c], name=c, **common_kw) for c in data2.columns]
-    layout = dict(title=title)
-    fig = dict(data=data, layout=layout)
-    iplot(fig, show_link=False)
-
-    plotly_df(data2, title='Resultado das vendas')
-
+        #"""Visualize all the dataframe columns as line plots."""
+        common_kw = dict(x=df.index, mode='lines')
+        data = [go.Scatter(y=data2[c], name=c, **common_kw) for c in data2.columns]
+        layout = dict(title=title)
+        fig = dict(data=data, layout=layout)
+        iplot(fig, show_link=False)
+        plotly_df(data2, title='Resultado das vendas')
 
 
+return 
 
 
 
