@@ -1,6 +1,6 @@
 import statsmodels.api as sm
 import itertools
-
+def 
 def tunning_SARIMAX_hyperparameters(timeseries):
     
     #Finds the best SARIMAX hyperparameters for a given timeseries 

@@ -15,9 +15,6 @@ import matplotlib
 from pylab import rcParams
 from statsmodels.tsa.stattools import adfuller
 
-
-
-
 #Executando parametros de plot
 matplotlib.rcParams['axes.labelsize'] = 14
 matplotlib.rcParams['xtick.labelsize'] = 12
@@ -55,6 +52,7 @@ y = data['Sales'].resample('MS').mean()
 y.plot(figsize=(15, 6))
 plt.show()
 print('\n') # Pular a linha para o s graficos não ficarem encavalados
+
 # Plota os graficos de tendencia, sasonalidade e Residual
 rcParams['figure.figsize'] = 18, 8
 decomposition = sm.tsa.seasonal_decompose(y, model='additive')
@@ -92,8 +90,8 @@ adfuller(y)
 test_stationarity(y)
 
 # Roda modelo de previsão de vendas (Forecasting)
-pred = results.get_prediction(start=pd.to_datetime('2017-01-01'), dynamic=False)
-pred_ci = pred.conf_int()
+#pred = results.get_prediction(start=pd.to_datetime('2017-01-01'), dynamic=False)
+#pred_ci = pred.conf_int()
 
 ax = y['2014':].plot(label='observed')
 pred.predicted_mean.plot(ax=ax, label='One-step ahead Forecast', alpha=.7, figsize=(14, 7))
