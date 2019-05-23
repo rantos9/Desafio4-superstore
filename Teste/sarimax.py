@@ -28,7 +28,6 @@ def tunning_SARIMAX_hyperparameters(timeseries):
 
 #Ajusta os valores do SARIMAX para a melhor performace
 tunning_SARIMAX_hyperparameters(y)
-good_param, good_param_seasonal = tunn # Para que serve a variavel tunn ?
 
 #Fita o modelo Sarimax para os valores do df
 mod = sm.tsa.statespace.SARIMAX(y,
