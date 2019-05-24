@@ -1,5 +1,6 @@
 from flask import request, jsonify, abort, make_response
 from app import app
+from algorithms import ModelLocator
 
 @app.route('/superstore/predict', methods=['GET'])
 def timeseries_predict():
@@ -27,8 +28,9 @@ def timeseries_predict():
     if param_category not in category_list:
         abort(make_response(jsonify(message='Category is not valid'), 422))
 
-    #Carregar Modelo e passar algorithm, category e date como parametros
-    return jsonify(f'Cat: {param_category},Cycles: {param_cycles},Algorithm:{param_algorithm}'), 200
+    #Carregar Modelo e passar algorithm, category(OU PRODUTO) e date como parametros
+    return jsonify(ModelLocator.predict(param_category, param_algorithm, param_cycles)), 200
+    #return jsonify(f'Cat:{param_category},Cycles:{param_cycles},Algorithm:{param_algorithm}'),200
 
 @app.route('/superstore/categories/<category_id>/products')
 def products_by_category(category_id):
