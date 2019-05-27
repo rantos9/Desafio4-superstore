@@ -1,6 +1,5 @@
 from flask import request, jsonify, abort, make_response
-from app import app
-
+app = Flask(__name__)
 @app.route('/superstore/predict', methods=['GET'])
 def timeseries_predict():
     '''
@@ -15,7 +14,7 @@ def timeseries_predict():
 
     #Carregar lista de categorias da planilha
     category_list = ['Office Supplies', 'Furniture', 'Technology']
-    algorithm_list = ['ARIMA', 'SARIMAX']
+    algorithm_list = ['ARIMA', 'SARIMAX','PROPHET']
 
     param_algorithm = request.args.get('algorithm').strip('\'"')
     param_cycles = request.args.get('cycles', type=int)
