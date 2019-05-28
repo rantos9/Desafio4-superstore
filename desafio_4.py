@@ -36,7 +36,3 @@ def filter_by_category(category):
 data = filter_by_category('Furniture')
 prepare_time_series(data)
 print(data.head())
-
-
-
-

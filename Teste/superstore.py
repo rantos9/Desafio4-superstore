@@ -1,33 +1,35 @@
+from flask import Flask
 from flask import request, jsonify, abort, make_response
+from modelo2 import modelo2
+
 app = Flask(__name__)
-@app.route('/superstore/predict', methods=['GET'])
+@app.route('/superstore/predict', methods=['GET','POST'])
 def timeseries_predict():
     '''
     Metodo que executa a predicao do time_series, de acordo com os parâmetros selecionados.
     algorithm:
-        ARIMA, SARIMAX
+        ARIMA, SARIMAX ou PROPHET 
     category:
         'Office Supplies', 'Furniture', 'Technology'
     cycles:
         Número de janelas a partir de 12/2017
     '''
-
     #Carregar lista de categorias da planilha
-    category_list = ['Office Supplies', 'Furniture', 'Technology']
-    algorithm_list = ['ARIMA', 'SARIMAX','PROPHET']
-
+    category_list=('Office Supplies', 'Furniture', 'Technology')
+    algorithm_list=('arima', 'sarimax','prophet')
+    
     param_algorithm = request.args.get('algorithm').strip('\'"')
     param_cycles = request.args.get('cycles', type=int)
     param_category = request.args.get('category').strip('\'"')
-   
+    
     if param_algorithm.upper() not in algorithm_list:
         abort(make_response(jsonify(message='Algorithm is not valid'), 422))
 
     if param_category not in category_list:
         abort(make_response(jsonify(message='Category is not valid'), 422))
-
+    
     #Carregar Modelo e passar algorithm, category e date como parametros
-    return jsonify(f'Cat: {param_category},Cycles: {param_cycles},Algorithm:{param_algorithm}'), 200
+    return jsonify({'category':param_category,'cycles': param_cycles,'algorithm':param_algorithm}),  200
 
 @app.route('/superstore/categories/<category_id>/products')
 def products_by_category(category_id):
@@ -41,5 +43,5 @@ def categories():
     '''
     Obtém a lista de categorias
     '''
-    return category_list, 200
-    
+    return 'category_list' , 200 
+if __name__ == "__main__":    app.run(debug=True)
